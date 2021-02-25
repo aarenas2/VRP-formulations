@@ -2,8 +2,10 @@
 
 This is a repository for different VRP formulations
 
-CVRP: Is an initial approach to a Gurobipy formulation
+CVRP: is an initial approach to a Gurobipy formulation
 
-CVRP II: Is the formulation as written in the investigation proposal
+CVRP II: is the formulation as written in the investigation proposal
 
-HFMDCVRP: First multi-attribute model with multiple depots and heterogeneous fleet
+HFMDCVRP: first multi-attribute model with multiple depots and heterogeneous fleet
+
+CVRP Efficient: same problem as in CVRP II but with a different formulation. Optimal is found in less than 60 seconds
