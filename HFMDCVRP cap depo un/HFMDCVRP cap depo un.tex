@@ -1,0 +1,151 @@
+% This is file `elsarticle-template-1a-num.tex',
+%
+% Copyright 2009 Elsevier Ltd.
+%
+% This file is part of the 'Elsarticle Bundle'.
+% ---------------------------------------------
+%
+% It may be distributed under the conditions of the LaTeX Project Public
+% License, either version 1.2 of this license or (at your option) any
+% later version.  The latest version of this license is in
+%    http://www.latex-project.org/lppl.txt
+% and version 1.2 or later is part of all distributions of LaTeX
+% version 1999/12/01 or later.
+%
+% The list of all files belonging to the 'Elsarticle Bundle' is
+% given in the file `manifest.txt'.
+%
+% Template article for Elsevier's document class `elsarticle'
+% with numbered style bibliographic references
+%
+% $Id: elsarticle-template-1a-num.tex 151 2009-10-08 05:18:25Z rishi $
+% $URL: http://lenova.river-valley.com/svn/elsbst/trunk/elsarticle-template-1a-num.tex $
+%
+%\documentclass[12pt]{elsarticle}
+
+% Use the option review to obtain double line spacing
+ \documentclass[preprint,review,12pt]{elsarticle}
+
+% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+% for a journal layout:
+% \documentclass[final,1p,times]{elsarticle}
+% \documentclass[final,1p,times,twocolumn]{elsarticle}
+% \documentclass[final,3p,times]{elsarticle}
+% \documentclass[final,3p,times,twocolumn]{elsarticle}
+% \documentclass[final,5p,times]{elsarticle}
+% \documentclass[final,5p,times,twocolumn]{elsarticle}
+
+% if you use PostScript figures in your article
+% use the graphics package for simple commands
+% \usepackage{graphics}
+% or use the graphicx package for more complicated commands
+% \usepackage{graphicx}
+% or use the epsfig package if you prefer to use the old commands
+% \usepackage{epsfig}
+
+% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+% The amsthm package provides extended theorem environments
+% \usepackage{amsthm}
+
+% The lineno packages adds line numbers. Start line numbering with
+% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+% for the whole article with \linenumbers after \end{frontmatter}.
+% \usepackage{lineno}
+
+% natbib.sty is loaded by default. However, natbib options can be
+% provided with \biboptions{...} command. Following options are
+% valid:
+\usepackage{natbib}
+%   round  -  round parentheses are used (default)
+%   square -  square brackets are used   [option]
+%   curly  -  curly braces are used      {option}
+%   angle  -  angle brackets are used    <option>
+%   semicolon  -  multiple citations separated by semi-colon
+%   colon  - same as semicolon, an earlier confusion
+%   comma  -  separated by comma
+%   numbers-  selects numerical citations
+%   super  -  numerical citations as superscripts
+%   sort   -  sorts multiple citations according to order in ref. list
+%   sort&compress   -  like sort, but also compresses numerical citations
+%   compress - compresses without sorting
+%
+% \biboptions{comma,round}
+
+\usepackage{amsmath}
+%\usepackage[latin1]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{algorithm2e}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+%\usepackage{pstricks,pst-node} %Removed by Diana. It causes me an error when I added the adjustbox package
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{rotating}
+%\usepackage{tabularx}
+%\usepackage{tabulary}
+%\usepackage{pstricks-add}
+\usepackage{booktabs}
+%\usepackage{color}
+%\usepackage{algorithm}
+%\usepackage{algpseudocode}
+
+\newcommand\fede[1]{\textbf{{\color{red}#1}}}
+\newcommand\juan[1]{\textbf{{\color{blue}#1}}}
+ \biboptions{}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{example}{Example}[section]
+\newtheorem{remark}{Remark}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{corollary}{Corollary}[section]
+\def\proof{\noindent {\bf Proof. }}
+\def\endproof{{\bf \hfill $\square$}}
+
+
+\usepackage{fixltx2e}
+\usepackage{float}
+\usepackage{adjustbox}
+\usepackage{xcolor}
+
+\begin{document}
+
+\section{HFMDCVRP formulation}
+
+\subsection{Sets}
+Similarly to the CVRP, the HFMDVRP is designed upon a connected and directed Graph $G = (N,A)$. The set of nodes $N$ is composed by a set of clients $C$ and a set of depots $D$ ($N = C \cup D$). The set of arcs is represented by $A$. The set $K$ corresponds to the set of available vehicles to attend the demand. As the fleet is supposed to be heterogeneous, the capacity of each vehicle $k$ is given by $q_k$. The cost of using the arc $(i,j)$ is represented with $c_{ij}^k$ if it is traversed by the vehicle $k$. Note that now the costs are different according to the type of vehicle. The demand of every client is $d_i$. Lastly, as the depots have a finite capacity to attend the clients, a maximum depot capacity $R_i$ is added to each depot $i$ (this capacity is given in terms of amount of demand a depot can serve).
+
+\subsection{Variables}
+It uses the following sets of variables:
+
+\begin{itemize}
+	\item $x_{ij}^k \in \{0,1\}$: binary variable which takes the value 1 if the arc $(i,j)$ is used by the $k^{th}$ vehicle, and zero otherwise. The number of variables of this family is $|K| \cdot |N^2|$.
+	\item $f_{ij}^k \geq 0$: continuous auxiliary variable which represents the demand already attended when vehicle $k$ use arc $(i,j)$. The objective of this variable is to ensure that the routes of each vehicle are well-defined and avoid cycling. It is also important to evaluate the capacity of the depots. The number of variables of this family is $|K| \cdot |N^2|$.
+	\item  $w_d^k \in  \{0,1\}$: Binary variable which takes the value 1 if vehicle $k$ is served from depot $d$ and zero otherwise. The number of variables of this family is $|K| \cdot |D|$.
+	\item $z_{i}^k \in  \{0,1\}$: Binary variable which takes the value 1 if vehicle $k$ serves client $i$ and zero otherwise. The number of variables of this family is $|K| \cdot |C|$.
+\end{itemize}
+
+\subsection{Formulation}
+
+\begin{align}
+    \text{(HFMDVRP) min} \quad        & Z = \sum\limits_{k\in K}\sum\limits_{i\in N}\sum\limits_{j\in N} c_{ij}^k \cdot x_{ij}^k    && \label{MDMVRP_FObj}    \\[5pt]
+	%\noindent \text{subject to} \quad & \sum\limits_{k \in K}\sum\limits_{j \in N} x_{ij}^k = 1  && \text{\hspace{-1cm}} \forall \ i \in C \label{MDMVRP_Service} \\
+	\noindent \text{subject to} \quad & \sum\limits_{k \in K} z_{i}^k = 1  && \text{\hspace{-1cm}} \forall \ i \in C \label{MDMVRP_Service} \\
+	& \sum\limits_{i \in C}d_i \cdot z_{i}^k \leq q_k               && \text{\hspace{-1cm}} \forall \ k \in K  \label{MDMVRP_Capacity} \\
+	& \sum\limits_{j \in N}x_{hj}^k = w_h^k                                         && \text{\hspace{-1cm}} \forall \ h \in D,\ k \in K \label{MDMVRP_StartRoute} \\
+	& \sum\limits_{i \in N}x_{ih}^k = w_h^k                                         && \text{\hspace{-1cm}} \forall \ h \in D,\ k \in K \label{MDMVRP_EndRoute} \\
+	& \sum\limits_{i \in N}x_{ih}^k - \sum\limits_{j \in N}x_{hj}^k = 0             && \text{\hspace{-1cm}} \forall \ h \in C,\ k \in K \label{MDMVRP_Balance} \\
+	& \sum\limits_{h \in D}\sum\limits_{j \in C}f_{hj}^k = 0 && \text{\hspace{-1cm}} \forall \ k \in K \label{MDVMRP_InitialF} \\
+	& \sum\limits_{i \in N}f_{ih}^k - \sum\limits_{j \in N}f_{hj}^k + d_h \cdot z_{h}^k = 0             && \text{\hspace{0cm}} \forall \ h \in C,\ k \in K \label{MDMVRP_Flow} \\
+	& \sum\limits_{i \in N}\sum\limits_{k \in K}f_{ih}^k \leq R_h  && \text{\hspace{-1cm}} \forall \ h \in D \label{MDMVRP_DepotQ} \\
+	& w_h^k \in\{0,1\}  && \text{\hspace{-1cm}} \forall \ h \in D, \ k \in K \label{MDVMRP_DomainW} \\
+	& x_{ij}^k\in\{0,1\} && \text{\hspace{-1cm}} \forall \ i,j \in N,  \ k \in K \label{MDVMRP_DomainX} \\
+	& 0 \leq f_{ij}^k \leq q_k \cdot x_{ij}^k && \text{\hspace{-1cm}} \forall \ i,j \in N,  \ k \in K \label{MDVMRP_DomainF} \\
+	& z_{i}^k\in\{0,1\} && \text{\hspace{-1cm}} \forall \ i \in N,  \ k \in K \label{MDVMRP_DomainZ} 
+\end{align}
+
+Constraints \eqref{MDMVRP_Service} ensure that every client is visited at least once. Inequalities \eqref{MDMVRP_Capacity} limit the amount of clients served by a vehicle according to their capacity. Constraints \eqref{MDMVRP_StartRoute} and \eqref{MDMVRP_EndRoute} guarantee that the vehicles depart and finish the route at the depot assigned to them. Equalities \eqref{MDMVRP_Balance} assure that the flow continues through the network. Equation \eqref{MDVMRP_InitialF} determines that all the initial arcs have not attended any demand. Equations \eqref{MDMVRP_Flow} adds the demand attended in every client to the next arc used. Inequalities \eqref{MDMVRP_DepotQ} guarantee that the capacity of every depot is not exceeded. The last four expressions define the domain of the decision variables.
+
+\end{document}
+
