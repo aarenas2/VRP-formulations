@@ -1,0 +1,212 @@
+% This is file `elsarticle-template-1a-num.tex',
+%
+% Copyright 2009 Elsevier Ltd.
+%
+% This file is part of the 'Elsarticle Bundle'.
+% ---------------------------------------------
+%
+% It may be distributed under the conditions of the LaTeX Project Public
+% License, either version 1.2 of this license or (at your option) any
+% later version.  The latest version of this license is in
+%    http://www.latex-project.org/lppl.txt
+% and version 1.2 or later is part of all distributions of LaTeX
+% version 1999/12/01 or later.
+%
+% The list of all files belonging to the 'Elsarticle Bundle' is
+% given in the file `manifest.txt'.
+%
+% Template article for Elsevier's document class `elsarticle'
+% with numbered style bibliographic references
+%
+% $Id: elsarticle-template-1a-num.tex 151 2009-10-08 05:18:25Z rishi $
+% $URL: http://lenova.river-valley.com/svn/elsbst/trunk/elsarticle-template-1a-num.tex $
+%
+%\documentclass[12pt]{elsarticle}
+
+% Use the option review to obtain double line spacing
+ \documentclass[preprint,review,12pt]{elsarticle}
+
+% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+% for a journal layout:
+% \documentclass[final,1p,times]{elsarticle}
+% \documentclass[final,1p,times,twocolumn]{elsarticle}
+% \documentclass[final,3p,times]{elsarticle}
+% \documentclass[final,3p,times,twocolumn]{elsarticle}
+% \documentclass[final,5p,times]{elsarticle}
+% \documentclass[final,5p,times,twocolumn]{elsarticle}
+
+% if you use PostScript figures in your article
+% use the graphics package for simple commands
+% \usepackage{graphics}
+% or use the graphicx package for more complicated commands
+% \usepackage{graphicx}
+% or use the epsfig package if you prefer to use the old commands
+% \usepackage{epsfig}
+
+% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+% The amsthm package provides extended theorem environments
+% \usepackage{amsthm}
+
+% The lineno packages adds line numbers. Start line numbering with
+% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+% for the whole article with \linenumbers after \end{frontmatter}.
+% \usepackage{lineno}
+
+% natbib.sty is loaded by default. However, natbib options can be
+% provided with \biboptions{...} command. Following options are
+% valid:
+\usepackage{natbib}
+%   round  -  round parentheses are used (default)
+%   square -  square brackets are used   [option]
+%   curly  -  curly braces are used      {option}
+%   angle  -  angle brackets are used    <option>
+%   semicolon  -  multiple citations separated by semi-colon
+%   colon  - same as semicolon, an earlier confusion
+%   comma  -  separated by comma
+%   numbers-  selects numerical citations
+%   super  -  numerical citations as superscripts
+%   sort   -  sorts multiple citations according to order in ref. list
+%   sort&compress   -  like sort, but also compresses numerical citations
+%   compress - compresses without sorting
+%
+% \biboptions{comma,round}
+
+\usepackage{amsmath}
+%\usepackage[latin1]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{algorithm2e}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+%\usepackage{pstricks,pst-node} %Removed by Diana. It causes me an error when I added the adjustbox package
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{rotating}
+%\usepackage{tabularx}
+%\usepackage{tabulary}
+%\usepackage{pstricks-add}
+\usepackage{booktabs}
+%\usepackage{color}
+%\usepackage{algorithm}
+%\usepackage{algpseudocode}
+
+\newcommand\fede[1]{\textbf{{\color{red}#1}}}
+\newcommand\juan[1]{\textbf{{\color{blue}#1}}}
+ \biboptions{}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{example}{Example}[section]
+\newtheorem{remark}{Remark}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{corollary}{Corollary}[section]
+\def\proof{\noindent {\bf Proof. }}
+\def\endproof{{\bf \hfill $\square$}}
+
+
+\usepackage{fixltx2e}
+\usepackage{float}
+\usepackage{adjustbox}
+\usepackage{xcolor}
+
+\begin{document}
+
+\section{HFMDPCVRPTW formulation}
+
+\subsection{Introduction}
+This formulation is a PCVRP (Periodic Capacitated Vehicle Routing Problem) where the fleet of vehicles is heterogeneous and it can be served from different depots. The vehicles are allowed to start the route everyday from different depots but must finish in the same depot were the route started. Additionally, clients have a time window in which they must be attended (is not possible to violate this time window). Clients also have possible patterns of attention. These pattern of visits are: daily, thrice per week, twice per week, once per week, once every two weeks. As Sundays are days-off, the time-span of the problem is of 12 days.
+
+%This formulation is a PCVRP (Periodic Capacitated Vehicle Routing Problem) where the fleet of vehicles is heterogeneous and it can be served from different depots. Additionally, clients must be served within a time-window. Clients have a defined frequency of visits in the time span:
+
+%\begin{itemize}
+	%\item T6: client must be visited everyday.
+	%\item T3: clients must be visited three times per week.
+	%\item T2: clients must be visited two times per week.
+	%\item T1: clients must be visited once per week.
+	%\item Q1: clients must be visited once every two weeks.
+%\end{itemize}
+
+\subsection{Sets}
+\begin{itemize}
+	\item $N$ is the set of all the nodes  (including the depots). Subindexes $i,j$ are used to indicate an element of $N$.
+	%\item $A$ are the arcs formed between all nodes.
+	%\item Directed Graph $G = (N,A)$.
+	\item $C$ is the set of clients. Subindex $c$ is used to indicate an element of $C$.
+	\item $D$ is the set of depots. Subindex $d$ is used to indicate an element of $D$.
+	\item $\Delta$ is the set of days. Subindex $\delta$ is used to indicate an element of $\Delta$. As referenced before, the scheduling span is of 12 days.
+	\item $K$ is the set of vehicles. Subindex $k$ is used to indicate an element of $K$.
+	\item $P$ is the set of patterns of visits available. Subindex $p$ is used to indicate an element of $P$.
+\end{itemize}
+ 
+\subsection{Parameters}
+\begin{itemize}
+	\item $F_{p\delta}$ is 1 if the pattern $p$ requires the client to be visited in the day $\delta$ and 0 otherwise.
+	\item $H_{cp}$ is 1 if client $c$ is eligible for pattern $p$ and 0 otherwise.
+	\item $q_k$ is the capacity of vehicle $k$ un units of demand.
+	\item $dem_c$ is the demand of client $c$ for each visit.
+	\item $s_c$ is the time to serve client $c$.
+	\item $[a_c,b_c]$ is the time window in which client $c$ must be attended.
+	\item $t_{ij}^k$ is the time to traverse arc $(i,j)$ with vehicle $k$.
+	\item $R_d$ is the capacity (in number of vehicles) of depot $d$.
+	\item A largely enough value (\textbf{M}) is used. It can be bounded by maximum time of a route.
+\end{itemize}
+
+\subsection{Variables}
+It uses the following sets of variables:
+
+\begin{itemize}
+	\item  $x_{ij}^{k\delta}  \in  \{ 0,1 \}$: binary variable which takes the value 1 if the arc $(i,j)$ is used by vehicle $k$ in the day $\delta$, and 0 otherwise. 
+	%\item $T_{i\delta} \geq 0$: time at which service starts in node $i$ in the day $\delta$.
+	\item $T_{ij}^{k\delta} \geq 0$: time at which service starts in node $j$ from node $i$ in the vehicle $k$ on day $\delta$. 
+	\item $y_{cp} \in  \{ 0,1 \}$: binary variable which takes the value 1 if client $c$ is visited according to pattern $p$ and 0 otherwise.
+	\item  $w_d^{k\delta} \in  \{0,1\}$: Binary variable which takes the value 1 if vehicle $k$ is served from depot $d$ on day $\delta$ and zero otherwise.
+	\item $f_{ij}^{k\delta}$ demand already attended when vehicle $k$ arrives to $j$ from $i$ on day $\delta$.
+\end{itemize}
+
+\subsection{Formulation}
+
+\begin{align}
+	%
+	\text{(VRP) min} \quad      & Z = \sum\limits_{\delta\in \Delta}\sum\limits_{d\in D} \sum\limits_{j\in N}\sum\limits_{k\in K} T_{dj}^{k\delta} - T_{jd}^{k\delta} + t_{dj}^k \cdot x_{dj}^{k\delta}    && \label{PCVRP_FObj}    \\[5pt]
+	%
+	\noindent \text{s.t.} \quad & \sum\limits_{j \in N,j \ne c}\sum\limits_{k \in K} x_{cj}^{k\delta} = \sum\limits_{p \in P} F_{p\delta} \cdot y_{cp}    && \text{\hspace{-1cm}} \forall \delta \in \Delta, \forall c \in C \label{PCVRP_Service} \\
+	%
+	& \sum\limits_{p \in P} H_{cp} \cdot y_{cp} \geq 1                 && \text{\hspace{-1cm}} \forall c \in C  \label{PCVRP_Freq} \\
+	%
+	& \sum\limits_{j \in N, j \ne d}x_{dj}^{k\delta} \leq w_d^{k\delta} && \text{\hspace{-1cm}} \forall \delta \in \Delta, \forall d \in D, \forall k \in K \label{PCVRP_StartRoute} \\
+	%
+	& \sum\limits_{d \in D}w_d^{k\delta} \leq 1 && \text{\hspace{-1cm}} \forall \delta \in \Delta, \forall k \in K \label{PCVRP_OneRouteK} \\
+	%
+	& \sum\limits_{i \in N, i \ne d}x_{id}^{k\delta} =    \sum\limits_{j \in N, j \ne d}x_{dj}^{k\delta} && \text{\hspace{-1cm}} \forall \delta \in \Delta, \forall d \in D, \forall k \in K   \label{PCVRP_EndRoute} \\
+	%
+	& \sum\limits_{i \in N, i \ne c}x_{ic}^{k\delta} - \sum\limits_{j \in N, j \ne c}x_{cj}^{k\delta} = 0             && \text{\hspace{-1cm}} \forall \delta \in \Delta, \forall c \in C, \forall k \in K  \label{PCVRP_Balance} \\
+	%
+	& \sum\limits_{k \in K}w_d^{k\delta} \leq R_d && \text{\hspace{-1cm}} \forall \delta \in \Delta, \forall d \in D \label{PCVRP_CapacityD} \\
+	%
+	& \sum\limits_{i \in N, i \ne c} \sum\limits_{k \in K}T_{ic}^{k\delta} \geq a_c  && \text{\hspace{-1cm}} \forall \delta \in \Delta, \forall c \in C \label{PCVRP_ArriveT}\\
+	%
+	& \sum\limits_{i \in N, i \ne c} \sum\limits_{k \in K}T_{ic}^{k\delta} \leq b_c - s_c && \text{\hspace{-1cm}} \forall \delta \in \Delta, \forall c \in C \label{PCVRP_DepartT}
+\end{align}
+
+\begin{align}
+	& \sum\limits_{i \in N, i \ne c} T_{ic}^{k\delta} + s_c +  t_{cj}^k \cdot  x_{cj}^{k\delta} - M \cdot (1-x_{cj}^{k\delta}) \leq T_{cj}^{k\delta} && \text{\hspace{-0cm}} \forall \delta \in \Delta, \forall c \in C, \forall j \in N (c \ne j), \forall k \in K  \label{PCVRP_OrderT}\\
+	%
+	& \sum\limits_{\delta \in \Delta} \sum\limits_{c \in C} \sum\limits_{d \in D}  f_{dc}^{k\delta} = 0 && \text{\hspace{-1cm}} \forall k \in K \label{PCVRP_LoadIni} \\
+	%
+	& \sum\limits_{i \in N, i \ne c} (f_{ic}^{k\delta} + dem_c \cdot x_{ci}^{k\delta})-\sum\limits_{j \in N, j \ne c} f_{cj}^{k\delta} = 0 && \text{\hspace{-1cm}} \forall \delta \in \Delta, \forall c \in C, \forall k \in K \label{PCVRP_LoadFlow} \\
+	%
+	& f_{ij}^{k\delta} \leq q_k \cdot x_{ij}^{k\delta} && \text{\hspace{-1cm}} \forall \delta \in \Delta, \forall i \in N, \forall j \in N, \forall k \in K \label{PCVRP_fdomain} \\
+	%
+	& x_{ij}^{k\delta} \in\{0,1\} && \text{\hspace{-1cm}} \forall \delta \in \Delta, \forall i \in N, \forall j \in N, \forall k \in K \label{PCVRP_DomainX}\\
+	%
+	& 0 \leq T_{ij}^{k\delta} \leq M \cdot  x_{ij}^{k\delta} && \text{\hspace{-1cm}} \forall \delta \in \Delta, \forall i \in N, \forall j \in N, \forall k \in K \label{PCVRP_DomainT}\\
+	%
+	& y_{cp} \in\{0,1\} && \text{\hspace{-1cm}} \forall c \in C, \forall p \in P \label{PCVRP_DomainY}\\
+	%
+	& w_d^k \in\{0,1\} && \text{\hspace{-1cm}} \forall d \in D, \forall k \in K \label{PCVRP_DomainW}
+\end{align}
+
+The objective function \eqref{PCVRP_FObj} minimizes the total time of all routes. Constraints \eqref{PCVRP_Service} to \eqref{PCVRP_Freq} define that every client is visited using at least one of their allowed patterns. Constraints \eqref{PCVRP_StartRoute} to \eqref{PCVRP_Balance} ensure that flow continues through the network: \eqref{PCVRP_StartRoute} define the start of the routes, \eqref{PCVRP_OneRouteK} allow only one route per day per vehicle, \eqref{PCVRP_EndRoute} force the route to finish at the same depot it started and \eqref{PCVRP_Balance} ensure that every node is left after every visit. Constraints \eqref{PCVRP_CapacityD} are the physical capacity constraints of every depot. Constraint \eqref{PCVRP_ArriveT} to \eqref{PCVRP_OrderT} condition the arrival time of the vehicles in the time window of every client: \eqref{PCVRP_ArriveT} make the vehicles arrive after the time window opens, \eqref{PCVRP_DepartT} make the vehicles arrive before they can not service the client without violating the time window and \eqref{PCVRP_OrderT} actualize the values of variable $T$. Constraints \eqref{PCVRP_LoadIni} to \eqref{PCVRP_LoadFlow} are the subtour elimination constraints and actualize the load of demand attended in every visit. Constraints \eqref{PCVRP_fdomain} to \eqref{PCVRP_DomainW} are the domain of the decision variables.
+
+\end{document}
+
